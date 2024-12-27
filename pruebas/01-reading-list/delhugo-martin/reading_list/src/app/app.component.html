@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading List</title>
+  </head>
+  <body>
+    <nav>
+      <h1>Reading list</h1>
+    </nav>
+
+    <!-- LIBRARY -->
+    <section class="library flex-column" >
+      <div class="titulo">
+        <h2>Library</h2>
+      </div>
+
+      <!-- form -->
+      <div class="form">
+        <form action="">
+          <label for="">Filter by genere</label>
+          <select id="genre" name="genre">
+            <option value="Fantasía">Fantasía</option>
+            <option value="Ciencia ficción">Ciencia ficción</option>
+            <option value="Zombies">Zombies</option>
+            <option value="Terror">Terror</option>
+          </select>
+        </form>
+      </div>
+
+      <!-- libros -->
+       <div class="lista flex-row">
+        <div class="card flex-column" *ngFor="let s of libross" >
+        <img src={{s.book.cover}} alt="portada_libro" class="card-img">
+        <button class="boton-libro">Add to wish list</button>
+      </div>
+       </div>
+
+    </section>
+
+
+
+
+    <!-- WISH LIST -->
+    <section class="wish_list">
+      <h2>Wish list</h2>
+        <!-- libros -->
+        <div class="lista flex-row">
+          <div class="card flex-column" *ngFor="let s of libross" >
+          <img src={{s.book.cover}} alt="portada_libro" class="card-img">
+        <button class="boton-libro">Remove to wish list</button>
+
+        </div>
+         </div>
+
+    </section>
+
+  </body>
+</html>
