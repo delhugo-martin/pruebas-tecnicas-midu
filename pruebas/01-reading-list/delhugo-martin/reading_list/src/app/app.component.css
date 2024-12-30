@@ -96,8 +96,6 @@ nav h1 {
 
 .card-img{
   height: 18rem;
-  width: 100%;
-  z-index: 1;
 }
 
 .card:hover{

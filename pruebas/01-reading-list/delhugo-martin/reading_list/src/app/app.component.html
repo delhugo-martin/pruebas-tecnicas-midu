@@ -31,9 +31,9 @@
 
       <!-- libros -->
        <div class="lista flex-row">
-        <div class="card flex-column" *ngFor="let s of libross" >
+        <div class="card flex-column" *ngFor="let s of librosArray" >
         <img src={{s.book.cover}} alt="portada_libro" class="card-img">
-        <button class="boton-libro">Add to wish list</button>
+        <button (click)="addToWishList(s.book)"  class="boton-libro">Add to wish list</button>
       </div>
        </div>
 
@@ -47,9 +47,10 @@
       <h2>Wish list</h2>
         <!-- libros -->
         <div class="lista flex-row">
-          <div class="card flex-column" *ngFor="let s of libross" >
-          <img src={{s.book.cover}} alt="portada_libro" class="card-img">
-        <button class="boton-libro">Remove to wish list</button>
+          <!--  src={{whishListt.cover}}  -->
+          <div *ngFor="let s of wishListArrayPrint"  class="card flex-column"  >
+          <img  src={{s.cover}} alt="portada_libro" class="card-img">
+        <button  class="boton-libro">Remove to wish list</button>
 
         </div>
          </div>
