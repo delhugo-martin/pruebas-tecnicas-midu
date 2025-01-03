@@ -15,7 +15,7 @@ export class AppComponent {
 
   library = books.library; // libros del json
 
-  librosArray: any
+  librosArray: any[]=[]
 
   wishListArrayPrint:any[]=[];
 
@@ -52,40 +52,68 @@ export class AppComponent {
     let wishList = localStorage.getItem('wishList');
     if(wishList !== null){
       this.wishListArrayPrint = JSON.parse(wishList)
-      //console.log("la wishlist orint es")
-      //console.log(this.wishListArrayPrint)
+      //wishListArrayPrint queda con la lista actualizada
     }
   }
 
   //////////////////////////////////////////////////////////////
-  // eventos
+  // EVENTOS
 
-  addToWishList(book: string) {
-    this.getWishListLS()
+  addToWishList(book:any) {
+    // 1) conviene trabajar con el array
+    // primero guardo el objeto book en el array wishListArrayPrint
+    console.log(book)
+    let bbook:any = {book}
 
-    // vamos a comprobar si el libro ya esta en la wishlist
-    let verfBook = this.wishListArrayPrint.find((b)=> b === book)
-    console.log(this.wishListArrayPrint)
+    bbook.book = book
 
-    console.log("el libro si sta")
-    console.log(verfBook)
 
-    // conviene trabajar con el array
-    // primero guardo el objeto book en el array wishListArray
-    this.wishListArrayPrint.push(book)
-        //console.log("w arrary") OK
-        //console.log(this.wishListArray)
+    this.wishListArrayPrint.push(bbook)
 
     // convierto el array el string
     let wishListStr = JSON.stringify(this.wishListArrayPrint)
-        //console.log("w string")
-        //console.log(wishListStr)
-        //console.log(typeof(wishListStr)) OK
 
+    // guardamos en el local storage el objeto wishList pasado como string
     localStorage.setItem('wishList',wishListStr)
     this.getWishListLS()
 
-  }
 
-  removeToWishList(isbn: string) {}
+    // 2) ahora tengo que borrar el libro de la libreria
+    // creo un nuevo array sin el libro seleccionado
+    let librosArrayNuevo = this.librosArray.filter(b => b.book !== book)
+    this.librosArray = librosArrayNuevo
+
+    // lo paso a string y seteo en el localstorage
+    let librosArrayStr = JSON.stringify(this.librosArray)
+    localStorage.setItem('libros', librosArrayStr)
+  }//
+
+
+  removeToWishList(book:any) {
+
+    // 1) conviene trabajar con el array
+    // primero guardo el objeto book en el array librosArray
+    this.librosArray.push(book)
+    console.log(book)
+
+    // convierto el array el string
+    let librosArrayStr = JSON.stringify(this.librosArray)
+
+    // guardamos en el local storage el objeto wishList pasado como string
+    localStorage.setItem('libros',librosArrayStr)
+    this.getLibraryLS()
+
+    // 2)creo un nuevo array sin el libro seleccionado
+    let wishListNuevo = this.wishListArrayPrint.filter(b => b !== book)
+    this.wishListArrayPrint = wishListNuevo
+
+    // lo paso a string y seteo en el localstorage
+    let wishListStr = JSON.stringify(this.wishListArrayPrint)
+    localStorage.setItem('wishList', wishListStr)
+
+
+
+
+
+  }//
 }
